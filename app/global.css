@@ -1,13 +1,23 @@
 * {
     box-sizing: border-box;
+    color: #dde7f3;
 }
 
-html, body{
+html{
     padding: 0;
     margin: 0;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     background-color: bisque;
+    background-image: url("/652.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     padding: 0 2rem;
+    transition: all 1.2s ease-in-out;
 }
 
 .carEntry{
@@ -15,10 +25,11 @@ html, body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 1rem;
+    margin: 2rem;
     padding: 1rem;
+    width: 70%;
     border-radius: 10px;
-    background-color: beige;
+    background-color: #55617aef;
     box-shadow: 10px 15px 20px rgb(139, 139, 139);
     transition: all 0.2s ease-in-out;
 }
@@ -58,6 +69,14 @@ html, body{
 
 .container{
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+
 }
 
 .center{

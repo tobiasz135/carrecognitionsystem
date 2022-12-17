@@ -1,5 +1,5 @@
 export default function CarEntry(carData: any) {
-    const {carEntryDate, carLicensePlate} = carData || {};
+    const {carEntryDate, carLicensePlate, carImage} = carData || {};
     return (
         <div className="carEntry">
             <h2>Informacje o pojeździe</h2>
@@ -13,7 +13,7 @@ export default function CarEntry(carData: any) {
                     </div>
 
                 </div>
-                <img className="carImage" src="https://thedrinkitgame.pl/DrinkIt_new2.png" alt="DrinkIt logo" width="100"/>  
+                <img className="carImage" src={carImage} alt="Car image here" width="100"/>  
             </div>
         </div>
     );
