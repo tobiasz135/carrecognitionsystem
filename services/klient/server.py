@@ -26,15 +26,15 @@ class Server(Thread):
     def addCar(self,pathToImage,carRegister,Date):
         new_car = {
             "pathToImage": pathToImage,
-            "carRegister": carRegister,
-            "Date": Date,
+            "carLicensePlate": carRegister,
+            "carEntryDate": Date,
         }
         self.car_list.append(new_car)
         self.send_car_list(self.car_list)
     #Funkcja usuwająca samochód z listy
     def removeCar(self,carRegister):
         for car in self.car_list:
-            if car["carRegister"] == carRegister:
+            if car["carLicensePlate"] == carRegister:
                 self.car_list.remove(car)
                 self.send_car_list(self.car_list)
                 return True
@@ -49,15 +49,26 @@ class Server(Thread):
         self.close()
     #Funkcja wysyłająca dane do klienta w formacie json
     def send_car_list(self,carListJson):
-            self.sio.send(json.dumps(carListJson).encode())
+        print("Sending data to client")
+        self.sio.send(json.dumps(carListJson))
 if __name__ == '__main__':
     server=Server()
-    server.start()
+    #server.start()
     server.addCar("path/to/image","EWI 123","2019-01-01")
+    server.addCar("path/to/image", "EWI 1234", "2019-01-01")
+    #server.send_car_list(server.car_list)
     sleep(5)
-    server.removeCar("EWI 123")
+    #server.removeCar("EWI 123")
+    if(server.removeCar("EWI 123")):
+        print("Car removed")
+        server.send_car_list(server.car_list)
+    sleep(5)
+    if(server.removeCar("EWI 1234")):
+        print("Car removed")
+        #server.send_car_list(server.car_list)
+    
     server.close()
 
-    server.join()
+    #server.join()
 
 
