@@ -57,7 +57,7 @@ class Preprocessing:
 
 
 if __name__ == '__main__':
-    img = cv2.imread('preprocessing/IMG_0892.jpg')
+    img = cv2.imread('preprocessing/img_3.png')
     P=None
     text=None
     plate=None

@@ -53,7 +53,7 @@ class Server(Thread):
         self.sio.send(json.dumps(carListJson))
 if __name__ == '__main__':
     server=Server()
-    #server.start()
+    server.start()
     server.addCar("path/to/image","EWI 123","2019-01-01")
     server.addCar("path/to/image", "EWI 1234", "2019-01-01")
     #server.send_car_list(server.car_list)
@@ -61,14 +61,14 @@ if __name__ == '__main__':
     #server.removeCar("EWI 123")
     if(server.removeCar("EWI 123")):
         print("Car removed")
-        server.send_car_list(server.car_list)
+        # server.send_car_list(server.car_list)
     sleep(5)
     if(server.removeCar("EWI 1234")):
         print("Car removed")
         #server.send_car_list(server.car_list)
     
-    server.close()
+    # server.close()
 
-    #server.join()
+    server.join()
 
 

@@ -1,5 +1,5 @@
 import socket,json
-from server import *
+from klient import *
 
 
 if __name__ == '__main__':
