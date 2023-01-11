@@ -1,5 +1,7 @@
 from datetime import datetime
+from time import sleep
 
+import cv2
 import matplotlib.pyplot as plt
 
 import services.preprocessing as preprocessing
@@ -32,14 +34,15 @@ if __name__ == '__main__':
             text = ocr.convert_preprocessed_image_to_text()
             if ocr.license_plate_validation():
                 print(text)
-                path=f'public/registers/photo{h}'
-                plt.imsave(f'public/registers/photo{h}', image)
+                path=f'/registers/photo{h}.jpg'
+                cv2.imwrite(f'public/registers/photo{h}.jpg', tmp[0])
                 h+=1
                 client.addCar(path, text,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                 break
         except:
             continue
     # client.send_car_list(client.car_list)
+    sleep(5)
     client.close()
 
 
