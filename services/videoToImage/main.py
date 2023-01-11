@@ -6,6 +6,8 @@ import shutil
 
 Images = Queue()
 
+
+
 def getImages(videoPath):
     video = cv2.VideoCapture(videoPath)
     currentframe = 0
@@ -22,8 +24,9 @@ def getImages(videoPath):
         isCorrect, frame = video.read()
         if isCorrect:
             if currentframe == 0:
-                name = directory + '//' + str(videoName) +  '(' + str(framenumber) + ').jpg'
-                Images.push(frame)
+                name = directory + '/' + str(videoName) +  '(' + str(framenumber) + ').jpg'
+                tmp=[frame,name]
+                Images.push(tmp)
                 cv2.imwrite(name, frame)
                 framenumber += 1
         else:

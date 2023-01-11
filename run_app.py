@@ -14,12 +14,15 @@ from services.klient.klient import Server
 
 if __name__ == '__main__':
     client = Server()
+    h=0
     preprocessing = Preprocessing('services/preprocessing/harascade_car.xml', 750)
     getImages("services/videoToImage/car1.mov")
     queue = services.videoToImage.main.Images
     print(queue.length())
     while not queue.isEmpty():
-        image = queue.pop()
+        tmp = queue.pop()
+        image=tmp[0]
+        path=tmp[1]
         plt.imshow(image)
         plt.show()
         try:
@@ -29,9 +32,14 @@ if __name__ == '__main__':
             text = ocr.convert_preprocessed_image_to_text()
             if ocr.license_plate_validation():
                 print(text)
-                client.addCar("car1", text,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                path=f'public/registers/photo{h}'
+                plt.imsave(f'public/registers/photo{h}', image)
+                h+=1
+                client.addCar(path, text,datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                break
         except:
             continue
+    # client.send_car_list(client.car_list)
     client.close()
 
 
