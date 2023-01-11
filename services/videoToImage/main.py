@@ -1,10 +1,10 @@
-import Queue
+from services.videoToImage.Queue import Queue
 import cv2
 import os
 import shutil
 
 
-Images = Queue.Queue()
+Images = Queue()
 
 def getImages(videoPath):
     video = cv2.VideoCapture(videoPath)
@@ -22,7 +22,7 @@ def getImages(videoPath):
         isCorrect, frame = video.read()
         if isCorrect:
             if currentframe == 0:
-                name = directory + '\\' + str(videoName) +  '(' + str(framenumber) + ').jpg'
+                name = directory + '//' + str(videoName) +  '(' + str(framenumber) + ').jpg'
                 Images.push(frame)
                 cv2.imwrite(name, frame)
                 framenumber += 1

@@ -68,6 +68,7 @@ if __name__ == '__main__':
         exit(0)
     try:
         plate = P.find_plate(img)
+        plt.imsave('preprocessing/rejestracja2.png', plate)
     except:
         print('Problem with finding plate')
         exit(0)
@@ -77,6 +78,7 @@ if __name__ == '__main__':
         print('Problem with finding text')
         exit(0)
     if text is not None:
+        plt.imsave('preprocessing/rejestracja1.png', text)
         plt.imshow(text)
         plt.show()
 
