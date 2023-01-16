@@ -1,0 +1,9 @@
+gevent_socketio==0.3.6
+imutils==0.5.4
+matplotlib==3.6.3
+numpy==1.23.4
+Pillow==9.4.0
+pytesseract==0.3.10
+scikit-image==0.19.2
+opencv-python==4.5.5.64
+python-socketio==5.7.2
