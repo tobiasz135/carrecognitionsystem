@@ -63,7 +63,7 @@ class Ocr:
                                              r'^[A-Z]{4}[1-9]{1}[A-Z]{2}$']
         for pattern in pattern_list_2_letter_distinction:
             if re.match(pattern, ocr_result):
-                list_2_letter_distinction = open("2_letter_distinction", "r").read().split("\n")
+                list_2_letter_distinction = open("services/ocr/2_letter_distinction", "r").read().split("\n")
                 letter_distinction = ocr_result[0:2]
                 for letter in list_2_letter_distinction:
                     if letter_distinction == letter:
@@ -71,7 +71,7 @@ class Ocr:
                 return False
         for pattern in pattern_list_3_letter_distinction:
             if re.match(pattern, ocr_result):
-                list_3_letter_distinction = open("3_letter_distinction", "r").read().split("\n")
+                list_3_letter_distinction = open("services/ocr/3_letter_distinction", "r").read().split("\n")
                 letter_distinction = ocr_result[0:3]
                 for letter in list_3_letter_distinction:
                     if letter_distinction == letter:

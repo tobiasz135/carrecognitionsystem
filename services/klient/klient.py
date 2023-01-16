@@ -62,7 +62,7 @@ if __name__ == '__main__':
     if(server.removeCar("EWI 123")):
         print("Car removed")
         # server.send_car_list(server.car_list)
-    sleep(5)
+    sleep(20)
     if(server.removeCar("EWI 1234")):
         print("Car removed")
         #server.send_car_list(server.car_list)
