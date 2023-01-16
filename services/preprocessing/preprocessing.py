@@ -3,10 +3,7 @@ import skimage.filters.thresholding
 from matplotlib import pyplot as plt
 import numpy as np
 import imutils
-import easyocr
-import imutils as im
-from pytesseract import pytesseract
-from skimage.filters import try_all_threshold
+
 
 
 

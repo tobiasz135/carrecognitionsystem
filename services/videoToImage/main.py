@@ -9,6 +9,8 @@ Images = Queue()
 
 
 def getImages(videoPath):
+    if(os.path.exists(videoPath)==False):
+        raise FileNotFoundError
     video = cv2.VideoCapture(videoPath)
     currentframe = 0
     framenumber = 0
@@ -25,7 +27,7 @@ def getImages(videoPath):
         if isCorrect:
             if currentframe == 0:
                 name = directory + '/' + str(videoName) +  '(' + str(framenumber) + ').jpg'
-                tmp=[frame,name]
+                tmp=frame
                 Images.push(tmp)
                 cv2.imwrite(name, frame)
                 framenumber += 1
@@ -33,8 +35,8 @@ def getImages(videoPath):
             break
         currentframe = (currentframe + 1) if currentframe < FPS_CAP else 0
     video.release()
-    cv2.destroyAllWindows()
+    # cv2.destroyWindow()
 
 
-getImages("car1.mov")
-print(Images.length())
+# getImages("car1.mov")
+# print(Images.length())

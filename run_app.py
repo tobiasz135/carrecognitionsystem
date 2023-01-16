@@ -2,13 +2,8 @@ from datetime import datetime
 from time import sleep
 
 import cv2
-import matplotlib.pyplot as plt
 
-import services.preprocessing as preprocessing
-import services.ocr as ocr
-import services.klient as klient
 import services.videoToImage.main
-from services.videoToImage.Queue import Queue
 from services.videoToImage.main import getImages
 from services.preprocessing.preprocessing import Preprocessing
 from services.ocr.ocr import Ocr
@@ -32,33 +27,49 @@ def delete_car_name_from_file(name):
 
 
 if __name__ == '__main__':
-    client = Server()
+    try:
+        client = Server()
+    except:
+        print("Wlacz serwer node.js")
+        exit(1)
     h = 0
+
     preprocessing = Preprocessing('services/preprocessing/harascade_car.xml', 750)
-    getImages("services/videoToImage/car1.mov")
-    queue = services.videoToImage.main.Images
-    print(queue.length())
-    while not queue.isEmpty():
-        tmp = queue.pop()
-        image = tmp[0]
-        path = tmp[1]
-        plt.imshow(image)
-        plt.show()
+    while True:
+
+        path_to_image=input("Podaj sciezke\n")
+        if path_to_image=='q':
+            break
         try:
-            image = preprocessing.find_plate(image)
-            image = preprocessing.find_text(image)
-            ocr = Ocr(image)
-            text = ocr.convert_preprocessed_image_to_text()
-            if ocr.license_plate_validation():
-                add_car_name_to_file(text)
-                print(text)
-                path = f'/registers/photo{h}.jpg'
-                cv2.imwrite(f'public/registers/photo{h}.jpg', tmp[0])
-                h += 1
-                client.addCar(path, text, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                break
+            getImages(path_to_image)
         except:
             continue
-    # client.send_car_list(client.car_list)
+        queue = services.videoToImage.main.Images
+        while not queue.isEmpty():
+            image = queue.pop()
+            image_tmp=image.copy()
+            ocr=None
+            text=None
+            try:
+                image = preprocessing.find_plate(image)
+                image = preprocessing.find_text(image)
+                ocr = Ocr(image)
+                text = ocr.convert_preprocessed_image_to_text()
+            except:
+                continue
+            try:
+                if ocr.license_plate_validation():
+                    add_car_name_to_file(text)
+                    print(text)
+                    path = f'/registers/photo{h}.jpg'
+                    cv2.imwrite(f'public/registers/photo{h}.jpg', image_tmp)
+                    h += 1
+                    client.addCar(path, text, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                    break
+            except:
+                print("Nie prawidlowa rejestracja")
+                continue
+            print("Nie znaleziono rejestracji samochodowej")
     sleep(5)
     client.close()
+    exit(0)
