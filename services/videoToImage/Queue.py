@@ -10,3 +10,5 @@ class Queue:
         return len(self.list) == 0
     def length(self):
         return len(self.list)
+    def clear(self):
+        self.list = []

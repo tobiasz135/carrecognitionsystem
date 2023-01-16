@@ -65,6 +65,7 @@ if __name__ == '__main__':
                     cv2.imwrite(f'public/registers/photo{h}.jpg', image_tmp)
                     h += 1
                     client.addCar(path, text, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                    queue.clear()
                     break
             except:
                 print("Nie prawidlowa rejestracja")
