@@ -6,7 +6,6 @@ apt install screen
 apt install tesseract-ocr -y
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-nvm install v18.12.1
 npm install express
 npm i
 npm install next react react-dom
