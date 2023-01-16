@@ -1,5 +1,13 @@
 #!/bin/sh
+apt install libgtk2.0-dev
+pip install -r requirements.txt
+apt install screen
+apt install tesseract-ocr -y
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install v18.12.1
+npm install express
 screen -d -m "node /services/socketServer/index.js"
 npm i
+npm install next react react-dom
 screen -d -m "npm run dev"
 python3 run_app.py
